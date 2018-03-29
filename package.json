@@ -1,0 +1,31 @@
+{
+  "name": "pet-match",
+  "version": "1.0.0",
+  "description": "App to connect people to pets that need adoption",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snarfblam/pet-match.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/snarfblam/pet-match/issues"
+  },
+  "homepage": "https://github.com/snarfblam/pet-match#readme",
+  "dependencies": {
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.37.5"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^4.0.0"
+  }
+}
