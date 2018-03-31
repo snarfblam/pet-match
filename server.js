@@ -3,6 +3,7 @@ var express = require('express');
 var dotenv = require('dotenv');
 var handlebars = require('express-handlebars');
 var httpRoutes = require('./routes/httpRoutes');
+var apiRoutes = require('./routes/apiRoutes');
 var database = require('./models');
 
 //// Configure Application ///////////////////////////
@@ -19,6 +20,7 @@ app.use(express.json());
 // Routing
 app.use(express.static('public'));
 app.use(httpRoutes);
+app.use('/api', apiRoutes);
 
 //// Start Server ////////////////////////////////////
 
