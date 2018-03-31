@@ -12,7 +12,17 @@ router.post('login', (req, res) => {
 router.post('createAccount', (req, res) => {
     res.status('501').end();
 });
+
 router.post('editInfo', (req, res) => {
+    // create event
+    res.status('501').end();
+});
+router.put('editInfo', (req, res) => {
+    // update event
+    res.status('501').end();
+});
+router.delete('editInfo', (req, res) => {
+    // remove event
     res.status('501').end();
 });
 router.post('profile', (req, res) => {
