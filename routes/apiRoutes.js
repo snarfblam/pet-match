@@ -18,3 +18,5 @@ router.post('editInfo', (req, res) => {
 router.post('profile', (req, res) => {
     res.status('501').end();
 });
+
+module.exports = router;
