@@ -4,6 +4,7 @@ var dotenv = require('dotenv');
 var handlebars = require('express-handlebars');
 var passport = require('passport')
 var httpRoutes = require('./routes/httpRoutes');
+var apiRoutes = require('./routes/apiRoutes');
 var database = require('./models');
 
 var session = require('express-session');
@@ -45,6 +46,7 @@ app.use(passport.session()); // persistent login sessions
 // Routing
 app.use(express.static('public'));
 app.use(httpRoutes);
+app.use('/api', apiRoutes);
 
 //// Start Server ////////////////////////////////////
 
