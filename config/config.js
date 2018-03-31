@@ -1,23 +1,26 @@
 module.exports = {
   "development": {
     "username": process.env.DB_USER || "root",
-    "password": process.env.DB_PASSWORD || null,
+    "password": process.env.DB_PASSWORD || "root",
+    "port":3308,
     "database": "pet_match_db",
-    "host": process.env.DB_HOST || "127.0.0.1",
+    "host": process.env.DB_HOST || "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "root",
+    "port":3308,
     "database": "pet_match_db",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": null,
+    "password":"root",
+    "port":3308,
     "database": "pet_match_db",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mysql"
   }
 }
