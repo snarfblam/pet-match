@@ -1,6 +1,6 @@
 //// Modules /////////////////////////////////////////
 var express = require('express');
-var dotenv = require('dotenv');
+var dotenv = require('dotenv').config();
 var handlebars = require('express-handlebars');
 var passport = require('passport')
 var httpRoutes = require('./routes/httpRoutes');
@@ -31,7 +31,7 @@ app.use(express.json());
 
  
 app.use(session({
-    store: new FileStore(options),
+    store: new FileStore(),
     secret: 'keyboard cat',
     resave: true, saveUninitialized:true
 }));
@@ -52,6 +52,9 @@ app.use('/api', apiRoutes);
 
 database.sequelize.sync({force: true}).then(function () {
     console.log("Database connected.")
+    // for testing purposes
+    database.user.create({ firstname: "tom", lastname: "my", username: "tommy", about: "sup", email: "a@b.com", password: "dog", last_login: Date(), status: 'active' }).then(r => console.log(r)).catch(e => console.log(e));
+    
 }).catch(err => {
     console.log("Failed to connect to database.", err);
 });
