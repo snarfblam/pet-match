@@ -31,7 +31,7 @@ app.use(express.json());
 
  
 app.use(session({
-    store: new FileStore(options),
+    store: new FileStore(),
     secret: 'keyboard cat',
     resave: true, saveUninitialized:true
 }));
