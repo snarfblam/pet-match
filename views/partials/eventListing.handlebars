@@ -1,0 +1,16 @@
+{{!-- Styleable, selectable elements:
+    event-item:     any row of the event listing (title excepted)
+    event-date, event-link, event-address, event-description:
+                    each what they sound like
+    event-address-line: individual line within address text
+ --}}
+
+<h3 class='event-title'>{{name}}</h3>
+<div class='event-date event-item'>{{datestring}}</div>
+<div class='event-item event-link'>{{link}}</div>
+<div class='event-item event-address'>
+    {{#each addressLines}}
+        <p class='event-address-line'>{{this}}</p>
+    {{/each}}
+</div>
+<div class='event-item event-description'>{{description}}</div>
