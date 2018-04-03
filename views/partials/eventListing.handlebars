@@ -1,16 +1,63 @@
-{{!-- Styleable, selectable elements:
-    event-item:     any row of the event listing (title excepted)
-    event-date, event-link, event-address, event-description:
+{{!-- Styleable, selectable elements: 
+    event-item:     any row of the event listing (div) (title excepted) 
+    event-text:     actual text content of an event-item (span, OR p for address) 
+    event-date, event-link, event-address, event-description: 
                     each what they sound like
-    event-address-line: individual line within address text
- --}}
+    event-address-line:
+                    individual line within address text event-input: input element, should have display: none; by default
+    event-edit:     div for event edit buttons/link
+    event-button:   edit/ok/cancel buttons
+    event-edit-btn:     button for user to edit description
+    event-edit-cancel:  button to cancel edit, should be display:none by default
+    event-edit-ok:      button to submit edit, should be display:none by default
 
-<h3 class='event-title'>{{name}}</h3>
-<div class='event-date event-item'>{{datestring}}</div>
-<div class='event-item event-link'>{{link}}</div>
+    Required object: {
+        name: string,
+        datestring: string,
+        link: string,
+        addressLines: string[2],
+        descriptionLines: string[],
+        descriptionText: string,
+        canEdit: boolean,
+    }                    
+--}}
+
+<h3 class='event-title'>
+    <span class='event-text'>
+        {{name}}
+    </span>
+    <input class='event-input' id='event-input-title' value="{{name}}">
+</h3>
+<div class='event-date event-item'>
+    <span class='event-text'>
+        {{datestring}}
+    </span>
+    <input class='event-input' id='event-input-date' value="{{datestring}}">
+</div>
+<div class='event-item event-link'>
+    <span class='event-text'>
+        {{link}}
+    </span>
+    <input class='event-input' id='event-input-link' value="{{link}}">
+</div>
 <div class='event-item event-address'>
     {{#each addressLines}}
-        <p class='event-address-line'>{{this}}</p>
+    <p class='event-address-line event-text'>{{this}}</p>
     {{/each}}
+    <input class='event-input' id='event-input-address-1' value="{{addressLines.[0]}}">
+    <input class='event-input' id='event-input-address-2' value="{{addressLines.[1]}}">
 </div>
-<div class='event-item event-description'>{{description}}</div>
+<div class='event-item event-description'>
+    {{#each descriptionLines}}
+        <p class='event-text'>{{this}}</p>
+    {{/each}}
+    <textarea class='event-input'>{{descriptionText}}</textarea>
+</div>
+
+{{#if canEdit}}
+    <div class="event-edit">
+        <button class="event-edit-btn">Edit Event Info</button>
+        <button class="event-edit-cancel">Cancel</button>
+        <button class="event-edit-ok">Submit</button>
+    </div>
+{{/if}}
