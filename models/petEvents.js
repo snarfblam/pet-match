@@ -1,6 +1,6 @@
 module.exports = function(sequelize, Sequelize) {
  
-    var Events = sequelize.define('events', {
+    var Event = sequelize.define('Event', {
  
         id: {
             autoIncrement: true,
@@ -29,14 +29,14 @@ module.exports = function(sequelize, Sequelize) {
        
     });
 
-    Events.associate = function(models) {
-    Events.belongsTo(models.user, {
+    Event.associate = function(models) {
+    Event.belongsTo(models.User, {
       foreignKey: {
         allowNull: false
       }
     });
   };
  
-    return Events;
+    return Event;
  
 }

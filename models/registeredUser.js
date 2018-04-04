@@ -1,28 +1,37 @@
 module.exports = function (sequelize, Sequelize) {
 
-    var User = sequelize.define('user', {
+    var User = sequelize.define('User', {
 
-        id: {
-            autoIncrement: true,
-            primaryKey: true,
-            type: Sequelize.INTEGER
+        // id: {
+        //     autoIncrement: true,
+        //     primaryKey: true,
+        //     type: Sequelize.INTEGER
+        // },
+        authType: {
+            type: Sequelize.ENUM('google', 'twitter', 'facebook'),
+            notEmpty: true,
         },
 
-        firstname: {
+        oauthId: {
+            type: Sequelize.STRING,
+            notEmpty: true,
+        },
+
+        firstName: {
             type: Sequelize.STRING,
             notEmpty: true
         },
 
-        lastname: {
+        lastName: {
             type: Sequelize.STRING,
             notEmpty: true
         },
 
-        username: {
-            type: Sequelize.TEXT
+        displayName: {
+            type: Sequelize.STRING
         },
 
-        about: {
+        bio: {
             type: Sequelize.TEXT
         },
 
@@ -30,13 +39,14 @@ module.exports = function (sequelize, Sequelize) {
             type: Sequelize.STRING,
             validate: {
                 isEmail: true
-            }
+            },
+            notEmpty: false,
         },
 
-        password: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
+        // password: {
+        //     type: Sequelize.STRING,
+        //     allowNull: false
+        // },
 
         last_login: {
             type: Sequelize.DATE
@@ -48,11 +58,12 @@ module.exports = function (sequelize, Sequelize) {
         }
 
 
+
     });
 
     User.associate = function (models) {
 
-        User.hasMany(models.events, {
+        User.hasMany(models.Event, {
             onDelete: "cascade"
         });
     };
