@@ -87,12 +87,12 @@ router.put('/editInfo/:id', (req, res) => {
     });
 });
 // Removes and existing event entry by ID
-// Returns: 
-//  {
-//      status: "error" | "removed",
-//      error?: string,
-//  }
-// Todo: some kind of user or user token validation
+// - Returns: 
+//    {
+//        status: "error" | "removed",
+//        error?: string,
+//    }
+// - Todo: some kind of user or user token validation
 router.delete('/editInfo/:id', (req, res) => {
     models.events.destroy({
         where: { id: req.params.id }
