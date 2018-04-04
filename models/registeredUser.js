@@ -39,7 +39,8 @@ module.exports = function (sequelize, Sequelize) {
             type: Sequelize.STRING,
             validate: {
                 isEmail: true
-            }
+            },
+            notEmpty: false,
         },
 
         // password: {
