@@ -50,14 +50,6 @@ app.use(session({
 
 // Routing
 app.set('trust proxy', true);
-// app.use(cookieSession({
-//     name: 'session',
-//     keys: ['9191'],
-//     maxAge: 2160000000,
-//     resave: true,
-//     saveUninitialized: true,
-// }));
-// app.use(cookieParser());
 
 googleAuth(passport);
 app.use(passport.initialize());
