@@ -12,6 +12,9 @@ var googleAuth = require('./auth/googleAuth');
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 
+var cookieSession = require('cookie-session');
+var cookieParser = require('cookie-parser');
+
 //// Configure Application ///////////////////////////
 
 var PORT = process.env.PORT || 8080;
@@ -47,6 +50,12 @@ app.use(express.json());
 
 // Routing
 
+app.use(cookieSession({
+    name: 'session',
+    keys: ['9191'],
+}));
+app.use(cookieParser());
+
 googleAuth(passport);
 app.use(passport.initialize());
 
@@ -59,8 +68,32 @@ app.get('/auth/google/callback',
         failureRedirect: 'http://localhost:8080/',
     }),
     (req, res) => { 
-        null;
-        res.send("cool").status(200).end();
+        req.session.token = req.user.token;
+        req.session.authType = 'google';
+        req.session.oauthId = req.user.profile.id;
+        req.session.oauthDisplayName = req.user.profile.displayName;
+        req.session.oauthProfile = req.user.profile;
+
+        database.User.findOne({
+            where: {
+                authType: req.session.authType,
+                oauthId: req.session.oauthId
+            }
+        }).then(data => {
+            if (data) {
+                // User is already registered.
+                req.session.userId = data.id;
+                // Redirect to saved redirect url (or landing page if not set)
+                if (req.session.redirectUrl) {
+                    res.redirect(req.session.redirectUrl);
+                } else {
+                    res.redirect('/');
+                }
+            } else {
+                // User is NOT registered.
+                res.redirect('/register');
+            }
+        });
     }
 );
 
@@ -84,7 +117,7 @@ app.use('/api', apiRoutes);
 database.sequelize.sync({ force: true }).then(function () {
     console.log("Database connected.")
     // for testing purposes
-    database.user.create({ firstname: "tom", lastname: "my", username: "tommy", about: "sup", email: "a@b.com", password: "dog", last_login: Date(), status: 'active' }).then(r => console.log(r)).catch(e => console.log(e));
+    database.User.create({ firstname: "tom", lastname: "my", username: "tommy", about: "sup", email: "a@b.com", password: "dog", last_login: Date(), status: 'active' }).then(r => console.log(r)).catch(e => console.log(e));
 
 }).catch(err => {
     console.log("Failed to connect to database.", err);
