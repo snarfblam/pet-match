@@ -49,10 +49,13 @@ app.use(express.json());
 // app.use(passport.session()); // persistent login sessions
 
 // Routing
-
+app.set('trust proxy', true);
 app.use(cookieSession({
     name: 'session',
     keys: ['9191'],
+    maxAge: 2160000000,
+    resave: true,
+    saveUninitialized: true,
 }));
 app.use(cookieParser());
 
@@ -72,7 +75,7 @@ app.get('/auth/google/callback',
         req.session.authType = 'google';
         req.session.oauthId = req.user.profile.id;
         req.session.oauthDisplayName = req.user.profile.displayName;
-        req.session.oauthProfile = req.user.profile;
+        // req.session.oauthProfile = req.user.profile;
 
         database.User.findOne({
             where: {

@@ -33,6 +33,7 @@
     "session-file-store": "^1.2.0"
   },
   "devDependencies": {
+    "@types/jquery": "^3.3.1",
     "sequelize-cli": "^4.0.0"
   }
 }

@@ -27,7 +27,20 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 router.get('/register', (req, res) => {
-    res.render('register');
+    if (req.session.userId) {
+        res.redirect('/'); // logged in users can't register, DUH!
+    } else if (!req.session.oauthId) {
+        res.redirect('/login'); // User must oauth before creating an account here.
+    } else {
+        var datums = {
+            displayName: req.session.oauthDisplayName,
+        };
+        if (req.session.authType == 'google') {
+            // datums.firstName = req.session.oauthProfile.name.givenName || "";
+            // datums.lastName = req.session.oauthProfile.name.familyName || "";
+        }
+        res.render('register', datums);
+    }    
 });
 router.get('/test', (req, res) => {
     res.render('test', {
