@@ -35,11 +35,11 @@ app.use(express.json());
 // from session file store
 
 
-// app.use(session({
-//     store: new FileStore(),
-//     secret: 'keyboard cat',
-//     resave: true, saveUninitialized:true
-// }));
+app.use(session({
+    store: new FileStore(),
+    secret: 'keyboard cat',
+    resave: true, saveUninitialized:true
+}));
 
 // // For Passport
 // // app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true})); // session secret
@@ -50,14 +50,14 @@ app.use(express.json());
 
 // Routing
 app.set('trust proxy', true);
-app.use(cookieSession({
-    name: 'session',
-    keys: ['9191'],
-    maxAge: 2160000000,
-    resave: true,
-    saveUninitialized: true,
-}));
-app.use(cookieParser());
+// app.use(cookieSession({
+//     name: 'session',
+//     keys: ['9191'],
+//     maxAge: 2160000000,
+//     resave: true,
+//     saveUninitialized: true,
+// }));
+// app.use(cookieParser());
 
 googleAuth(passport);
 app.use(passport.initialize());
@@ -75,7 +75,7 @@ app.get('/auth/google/callback',
         req.session.authType = 'google';
         req.session.oauthId = req.user.profile.id;
         req.session.oauthDisplayName = req.user.profile.displayName;
-        // req.session.oauthProfile = req.user.profile;
+        req.session.oauthProfile = req.user.profile;
 
         database.User.findOne({
             where: {
