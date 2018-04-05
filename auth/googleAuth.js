@@ -1,45 +1,69 @@
-// const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-
-// module.exports = function (passport) {
-//     passport.serializeUser(function (user, done) {
-//         done(null, user);
-//     });
-
-//     passport.deserializeUser(function (user, done) {
-//         done(null, user);
-//     });
-
-//     passport.use(new GoogleStrategy({
-//         clientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
-//         clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
-//         callbackURL: process.env.GOOGLE_OAUTH_CALLBACK,
-//     }, function (token, refreshToken, profile, done) {
-//         return done(null, {
-//             profile: profile,
-//             token: token
-//         });
-//     }));
-// };
+const express = require('express');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-module.exports = (passport) => {
-    passport.serializeUser((user, done) => {
-        done(null, user);
-    });
+var router = express.Router();
 
-    passport.deserializeUser((user, done) => {
-        done(null, user);
-    });
 
-    passport.use(new GoogleStrategy({
-        clientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
-        callbackURL: process.env.GOOGLE_OAUTH_CALLBACK,
+router.get('/auth/google', function (a, b, next) {
+    next();
+});
+
+router.get('/auth/google/callback',
+    passport.authenticate('google', {
+        failureRedirect: 'http://localhost:8080/',
+    }),
+    (req, res) => { 
+        req.session.token = req.user.token;
+        req.session.authType = 'google';
+        req.session.oauthId = req.user.profile.id;
+        req.session.oauthDisplayName = req.user.profile.displayName;
+        req.session.oauthProfile = req.user.profile;
+        req.session.save();
+        
+        database.User.findOne({
+            where: {
+                authType: req.session.authType,
+                oauthId: req.session.oauthId
+            }
+        }).then(data => {
+            if (data) {
+                // User is already registered.
+                req.session.userId = data.id;
+                // Redirect to saved redirect url (or landing page if not set)
+                if (req.session.redirectUrl) {
+                    res.redirect(req.session.redirectUrl);
+                } else {
+                    res.redirect('/');
+                }
+            } else {
+                // User is NOT registered.
+                res.redirect('/register');
+            }
+        });
+    }
+);
+
+module.exports = {
+    router: router,
+    strategy: (passport) => {
+        passport.serializeUser((user, done) => {
+            done(null, user);
+        });
+
+        passport.deserializeUser((user, done) => {
+            done(null, user);
+        });
+
+        passport.use(new GoogleStrategy({
+            clientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+            callbackURL: process.env.GOOGLE_OAUTH_CALLBACK,
         },
-        (token, refreshToken, profile, done) => {
-            return done(null, {
-                profile: profile,
-                token: token
-            });
-        }));
+            (token, refreshToken, profile, done) => {
+                return done(null, {
+                    profile: profile,
+                    token: token
+                });
+            }));
+    }
 };

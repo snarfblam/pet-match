@@ -65,47 +65,48 @@ app.use(session({
 // Routing
 app.set('trust proxy', true);
 
-googleAuth(passport);
+googleAuth.initStrategy(passport);
 app.use(passport.initialize());
+app.use(googleAuth.router);
 
-app.get('/auth/google', function (a, b, next) {
-    next();
-});
+// app.get('/auth/google', function (a, b, next) {
+//     next();
+// });
 
-app.get('/auth/google/callback',
-    passport.authenticate('google', {
-        failureRedirect: 'http://localhost:8080/',
-    }),
-    (req, res) => { 
-        req.session.token = req.user.token;
-        req.session.authType = 'google';
-        req.session.oauthId = req.user.profile.id;
-        req.session.oauthDisplayName = req.user.profile.displayName;
-        req.session.oauthProfile = req.user.profile;
-        req.session.save();
+// app.get('/auth/google/callback',
+//     passport.authenticate('google', {
+//         failureRedirect: 'http://localhost:8080/',
+//     }),
+//     (req, res) => { 
+//         req.session.token = req.user.token;
+//         req.session.authType = 'google';
+//         req.session.oauthId = req.user.profile.id;
+//         req.session.oauthDisplayName = req.user.profile.displayName;
+//         req.session.oauthProfile = req.user.profile;
+//         req.session.save();
         
-        database.User.findOne({
-            where: {
-                authType: req.session.authType,
-                oauthId: req.session.oauthId
-            }
-        }).then(data => {
-            if (data) {
-                // User is already registered.
-                req.session.userId = data.id;
-                // Redirect to saved redirect url (or landing page if not set)
-                if (req.session.redirectUrl) {
-                    res.redirect(req.session.redirectUrl);
-                } else {
-                    res.redirect('/');
-                }
-            } else {
-                // User is NOT registered.
-                res.redirect('/register');
-            }
-        });
-    }
-);
+//         database.User.findOne({
+//             where: {
+//                 authType: req.session.authType,
+//                 oauthId: req.session.oauthId
+//             }
+//         }).then(data => {
+//             if (data) {
+//                 // User is already registered.
+//                 req.session.userId = data.id;
+//                 // Redirect to saved redirect url (or landing page if not set)
+//                 if (req.session.redirectUrl) {
+//                     res.redirect(req.session.redirectUrl);
+//                 } else {
+//                     res.redirect('/');
+//                 }
+//             } else {
+//                 // User is NOT registered.
+//                 res.redirect('/register');
+//             }
+//         });
+//     }
+// );
 
 app.get('/auth/google/auth', function (req, res, next) {
     if (!req.user) { // Not already logged in, probably okay to try to hit the oauth provider
