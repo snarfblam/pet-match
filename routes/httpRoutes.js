@@ -25,7 +25,15 @@ router.get('/eventDetails', (req, res) => {
     res.render('eventDetails');
 });
 router.get('/addEvent', (req, res) => {
-    res.render('addEvent');
+    getUser(req).then(user => {
+        var hbsData = {
+            logged: user != null
+        };
+        res.render('addEvent', hbsData);
+
+    }).catch(err => {
+        res.status('501').end();
+    });
 });
 router.get('/profile', (req, res) => {
     res.render('profile');

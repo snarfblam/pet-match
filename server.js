@@ -1,6 +1,9 @@
 //// Modules /////////////////////////////////////////
 var express = require('express');
+var fs = require('fs');
+var rimraf = require('rimraf');
 var dotenv = require('dotenv').config();
+var path = require('path');
 var handlebars = require('express-handlebars');
 var httpRoutes = require('./routes/httpRoutes');
 var apiRoutes = require('./routes/apiRoutes');
@@ -16,6 +19,14 @@ var cookieSession = require('cookie-session');
 var cookieParser = require('cookie-parser');
 
 //// Configure Application ///////////////////////////
+
+// For dev, our DB is wiped each time the app launches. We
+// don't want old sessions referencing non-existant records.
+try {
+    rimraf.sync(path.join(__dirname, 'sessions'));
+} catch (e) {
+    // HOPE NOTHING GOES WRONG!
+}
 
 var PORT = process.env.PORT || 8080;
 var app = express();
@@ -34,12 +45,15 @@ app.use(express.json());
 
 // from session file store
 
-
+var sessionStore = new FileStore();
+// sessionStore.clear();
 app.use(session({
-    store: new FileStore(),
+    store: sessionStore,
     secret: 'keyboard cat',
-    resave: true, saveUninitialized:true
+    resave: true,
+    saveUninitialized: true,
 }));
+
 
 // // For Passport
 // // app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true})); // session secret
@@ -68,7 +82,8 @@ app.get('/auth/google/callback',
         req.session.oauthId = req.user.profile.id;
         req.session.oauthDisplayName = req.user.profile.displayName;
         req.session.oauthProfile = req.user.profile;
-
+        req.session.save();
+        
         database.User.findOne({
             where: {
                 authType: req.session.authType,

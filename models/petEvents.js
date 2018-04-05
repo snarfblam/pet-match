@@ -2,27 +2,38 @@ module.exports = function(sequelize, Sequelize) {
  
     var Event = sequelize.define('Event', {
  
-        id: {
-            autoIncrement: true,
-            primaryKey: true,
-            type: Sequelize.INTEGER
-        },
- 
         date: {
             type: Sequelize.DATE,
             notEmpty: true
         },
  
-        location: {
+        address1: {
             type: Sequelize.STRING,
             notEmpty: true
         },
- 
+  
+        address2: {
+            type: Sequelize.STRING,
+            notEmpty: true
+        },
+        city: {
+            type: Sequelize.STRING,
+            notEmpty: true
+        },
+        state: {
+            type: Sequelize.STRING,
+            notEmpty: true
+        },
+        zip: {
+            type: Sequelize.STRING,
+            notEmpty: true
+        },
+        
         description: {
             type: Sequelize.TEXT
         },
  
-        RSVP: {
+        link: {
             type: Sequelize.STRING
         },
  
