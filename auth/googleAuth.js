@@ -1,51 +1,15 @@
 const express = require('express');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-
 var router = express.Router();
+var passportInstance;
+var models = require('../models');
 
-
-router.get('/auth/google', function (a, b, next) {
-    next();
-});
-
-router.get('/auth/google/callback',
-    passport.authenticate('google', {
-        failureRedirect: 'http://localhost:8080/',
-    }),
-    (req, res) => { 
-        req.session.token = req.user.token;
-        req.session.authType = 'google';
-        req.session.oauthId = req.user.profile.id;
-        req.session.oauthDisplayName = req.user.profile.displayName;
-        req.session.oauthProfile = req.user.profile;
-        req.session.save();
-        
-        database.User.findOne({
-            where: {
-                authType: req.session.authType,
-                oauthId: req.session.oauthId
-            }
-        }).then(data => {
-            if (data) {
-                // User is already registered.
-                req.session.userId = data.id;
-                // Redirect to saved redirect url (or landing page if not set)
-                if (req.session.redirectUrl) {
-                    res.redirect(req.session.redirectUrl);
-                } else {
-                    res.redirect('/');
-                }
-            } else {
-                // User is NOT registered.
-                res.redirect('/register');
-            }
-        });
-    }
-);
 
 module.exports = {
     router: router,
-    strategy: (passport) => {
+    initStrategy: (passport) => {
+        passportInstance = passport;
+
         passport.serializeUser((user, done) => {
             done(null, user);
         });
@@ -65,5 +29,46 @@ module.exports = {
                     token: token
                 });
             }));
+
+
+
+        router.get('/auth/google', function (a, b, next) {
+            next();
+        });
+
+        router.get('/auth/google/callback',
+            passportInstance.authenticate('google', {
+                failureRedirect: 'http://localhost:8080/',
+            }),
+            (req, res) => {
+                req.session.token = req.user.token;
+                req.session.authType = 'google';
+                req.session.oauthId = req.user.profile.id;
+                req.session.oauthDisplayName = req.user.profile.displayName;
+                req.session.oauthProfile = req.user.profile;
+                req.session.save();
+
+                models.User.findOne({
+                    where: {
+                        authType: req.session.authType,
+                        oauthId: req.session.oauthId
+                    }
+                }).then(data => {
+                    if (data) {
+                        // User is already registered.
+                        req.session.userId = data.id;
+                        // Redirect to saved redirect url (or landing page if not set)
+                        if (req.session.redirectUrl) {
+                            res.redirect(req.session.redirectUrl);
+                        } else {
+                            res.redirect('/');
+                        }
+                    } else {
+                        // User is NOT registered.
+                        res.redirect('/register');
+                    }
+                });
+            }
+        );
     }
 };

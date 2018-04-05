@@ -54,7 +54,6 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-
 // // For Passport
 // // app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true})); // session secret
 
