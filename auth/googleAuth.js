@@ -46,7 +46,6 @@ module.exports = {
                 req.session.oauthId = req.user.profile.id;
                 req.session.oauthDisplayName = req.user.profile.displayName;
                 req.session.oauthProfile = req.user.profile;
-                req.session.save();
 
                 models.User.findOne({
                     where: {
@@ -61,14 +60,56 @@ module.exports = {
                         if (req.session.redirectUrl) {
                             res.redirect(req.session.redirectUrl);
                         } else {
-                            res.redirect('/');
+                            req.session.save((err => {
+                                res.redirect(req.session.afterLogin || '/');
+                            }));
                         }
                     } else {
                         // User is NOT registered.
-                        res.redirect('/register');
+                        var firstName = "";
+                        var lastName = "";
+                        if (req.session.authType == 'google') {
+                            var name = (req.session.oauthProfile || {}).name || {};
+                            firstName = name.givenName || firstName;
+                            lastName = name.familyName || lastName;
+                        }
+
+                        // create user account first
+                        models.User.create({
+                            authType: req.session.authType,
+                            oauthId: req.session.oauthId,
+                            displayName: req.session.oauthDisplayName,
+                            bio: "",
+                            status: 'active',
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: null,
+                        }).then(newData => {
+                            req.session.userId = newData.id;
+                            req.session.save((err) => {
+                                res.redirect(req.session.afterLogin || '/');
+                            })
+                        });
                     }
                 });
             }
         );
+
+        router.get('/auth/google/auth', function (req, res, next) {
+            // redirect after login will be specified via query string, e.g. http://qwert.heroku.com/auth/google/auth?then=
+            if (req.query.then) {
+                req.session.afterLogin = req.query.then;
+            }
+
+            req.session.save(() => {
+                if (!req.user) { // Not already logged in, probably okay to try to hit the oauth provider
+                    return next();
+                }
+                res.redirect(req.session.afterLogin || '/'); // Already logged in, send them where I want them after the callback anyway.
+            })
+        }, passport.authenticate('google', {
+            scope: ['https://www.googleapis.com/auth/userinfo.profile']
+        }));
+
     }
 };

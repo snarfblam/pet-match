@@ -11,11 +11,19 @@ router.get('/*', (req, res, next) => {
             { where: { id: id } }
         ).then(user => {
             req.userInfo = user;
-            res.hbsData = { logged: true };
+            res.hbsData = {
+                logged: true,
+                displayName: user.displayName,
+                thisPath: req.path,
+            };
             next();
         });
     } else {
-        res.hbsData = { logged: false };
+        res.hbsData = {
+            logged: false,
+            displayName: "guest",
+            thisPath: req.path,
+        };
         next();
     }
 })
@@ -69,7 +77,7 @@ router.get('/register', (req, res) => {
             email: null,
         }).then(result => {
             req.session.userId = result.id;
-            res.hbsData.displayName - req.session.oauthDisplayName;
+            res.hbsData.displayName = req.session.oauthDisplayName;
             if (req.session.authType == 'google') {
                 res.hbsData.firstName = req.session.oauthProfile.name.givenName || "";
                 res.hbsData.lastName = req.session.oauthProfile.name.familyName || "";

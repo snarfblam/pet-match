@@ -107,14 +107,6 @@ app.use(googleAuth.router);
 //     }
 // );
 
-app.get('/auth/google/auth', function (req, res, next) {
-    if (!req.user) { // Not already logged in, probably okay to try to hit the oauth provider
-        return next();
-    }
-    res.redirect('/'); // Already logged in, send them where I want them after the callback anyway.
-}, passport.authenticate('google', {
-    scope: ['https://www.googleapis.com/auth/userinfo.profile']
-}));
 
 
 
