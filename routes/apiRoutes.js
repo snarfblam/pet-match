@@ -25,16 +25,17 @@ router.post('/createAccount', (req, res) => {
 // Todo: some kind of user or user token validation
 router.post('/editInfo', (req, res) => {
     // models.user.create({firstname: "tom",lastname:"my", username: "tommy", about: "sup", email:"a@b.com", password: "dog", last_login:Date(), status: 'active'}).then(r=>console.log(r)).catch(e=>console.log(e))
-    models.events.create({
-        userId: req.body.userId,
-        location: req.body.location,
-        description: req.body.description,
-        RSVP: req.body.RSVP,
+    models.Event.create({
+        // userId: req.body.userId,
+        UserId: req.session.userId,
         date: req.body.date,
-        address: req.body.address,
+        address1: req.body.address1,
+        address2: req.body.address2,
         city: req.body.city,
         state: req.body.state,
         zip: req.body.zip,
+        description: req.body.description,
+        link: req.body.link,
     }).then(result => {
         console.log(result);
         res.json({

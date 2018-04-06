@@ -44,6 +44,8 @@ router.get('/eventDetails', (req, res) => {
     res.render('eventDetails', res.hbsData);
 });
 router.get('/addEvent', (req, res) => {
+    res.hbsData.now = new Date().toJSON().slice(0, 19);
+
     res.render('addEvent', res.hbsData);
 });
 router.get('/profile', (req, res) => {
