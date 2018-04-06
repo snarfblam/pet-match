@@ -91,6 +91,18 @@ router.get('/register', (req, res) => {
 
     }
 });
+router.get('/logout', (req, res) => {
+    req.logout();
+    delete req.session['token'];
+    delete req.session['authType'];
+    delete req.session['oauthId'];
+    delete req.session['oauthDisplayName'];
+    delete req.session['oauthProfile'];
+    delete req.session['userId'];
+    req.session.save(err => {
+        res.redirect('/');
+    });
+});
 router.get('/test', (req, res) => {
     res.hbsData.eventData = {
         name: "Event name",
