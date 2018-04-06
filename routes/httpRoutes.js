@@ -21,36 +21,28 @@ router.get('/*', (req, res, next) => {
 })
 
 router.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', res.hbsData);
 });
 router.get('/rescues', (req, res) => {
-    res.render('rescues');
+    res.render('rescues', res.hbsData);
 });
 router.get('/rescueDetails', (req, res) => {
-    res.render('rescueDetails');
+    res.render('rescueDetails', res.hbsData);
 });
 router.get('/events', (req, res) => {
-    res.render('events');
+    res.render('events', res.hbsData);
 });
 router.get('/eventDetails', (req, res) => {
-    res.render('eventDetails');
+    res.render('eventDetails', res.hbsData);
 });
 router.get('/addEvent', (req, res) => {
-    getUser(req).then(user => {
-        var hbsData = {
-            logged: user != null
-        };
-        res.render('addEvent', hbsData);
-
-    }).catch(err => {
-        res.status('501').end();
-    });
+    res.render('addEvent', res.hbsData);
 });
 router.get('/profile', (req, res) => {
-    res.render('profile');
+    res.render('profile', res.hbsData);
 });
 router.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login', res.hbsData);
 });
 router.get('/register', (req, res) => {
     if (req.session.userId) {
@@ -77,14 +69,12 @@ router.get('/register', (req, res) => {
             email: null,
         }).then(result => {
             req.session.userId = result.id;
-            var datums = {
-                displayName: req.session.oauthDisplayName,
-            };
+            res.hbsData.displayName - req.session.oauthDisplayName;
             if (req.session.authType == 'google') {
-                datums.firstName = req.session.oauthProfile.name.givenName || "";
-                datums.lastName = req.session.oauthProfile.name.familyName || "";
+                res.hbsData.firstName = req.session.oauthProfile.name.givenName || "";
+                res.hbsData.lastName = req.session.oauthProfile.name.familyName || "";
             }
-            res.render('register', datums);
+            res.render('register', res.hbsData);
         }).catch(err => {
             console.log(err);
         });
@@ -94,19 +84,18 @@ router.get('/register', (req, res) => {
     }
 });
 router.get('/test', (req, res) => {
-    res.render('test', {
-        eventData: {
-            name: "Event name",
-            datestring: "11/11/11 11:11 AM",
-            link: "http://website.com/thingymcstuffalot",
-            addressLines: ['10 street lane', 'New York, NY 10108'],
-            descriptionLines: [
-                "This is totally an event at a place and you're reading the description.",
-                "I just wanted to actually see some text on the page, kthxbie."
-            ],
-            descriptionText: "This is totally an event at a place and you're reading the description.\nI just wanted to actually see some text on the page, kthxbie."
-        }
-    });
+    res.hbsData.eventData = {
+        name: "Event name",
+        datestring: "11/11/11 11:11 AM",
+        link: "http://website.com/thingymcstuffalot",
+        addressLines: ['10 street lane', 'New York, NY 10108'],
+        descriptionLines: [
+            "This is totally an event at a place and you're reading the description.",
+            "I just wanted to actually see some text on the page, kthxbie."
+        ],
+        descriptionText: "This is totally an event at a place and you're reading the description.\nI just wanted to actually see some text on the page, kthxbie."
+    };
+    res.render('test', res.hbsData);
 });
 
 function getUser(req) {
