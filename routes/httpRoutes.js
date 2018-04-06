@@ -4,13 +4,24 @@ var express = require('express');
 
 var router = express.Router();
 
+router.get('/*', (req, res, next) => {
+    var id = req.session.userId;
+    if (id) {
+        models.User.findOne(
+            { where: { id: id } }
+        ).then(user => {
+            req.userInfo = user;
+            res.hbsData = { logged: true };
+            next();
+        });
+    } else {
+        res.hbsData = { logged: false };
+        next();
+    }
+})
+
 router.get('/', (req, res) => {
-    getUser(req).then(user => {
-        console.log(user);
-        res.render('index');
-    }).catch(err => {
-        res.status('501').end();
-    });
+    res.render('index');
 });
 router.get('/rescues', (req, res) => {
     res.render('rescues');
