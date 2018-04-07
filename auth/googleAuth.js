@@ -58,7 +58,9 @@ module.exports = {
                         req.session.userId = data.id;
                         // Redirect to saved redirect url (or landing page if not set)
                         if (req.session.redirectUrl) {
-                            res.redirect(req.session.redirectUrl);
+                            req.session.save((err => {
+                                res.redirect(req.session.redirectUrl);
+                            }));
                         } else {
                             req.session.save((err => {
                                 res.redirect(req.session.afterLogin || '/');
@@ -89,8 +91,12 @@ module.exports = {
                             req.session.save((err) => {
                                 res.redirect(req.session.afterLogin || '/');
                             })
+                        }).catch(e => {
+                            res.status(500).end();
                         });
                     }
+                }).catch(e => {
+                    res.status(500).end();
                 });
             }
         );

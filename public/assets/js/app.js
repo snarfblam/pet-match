@@ -1,3 +1,28 @@
+
+function displayError(title, message) {
+    $('#modal-error-message').text(title);
+    $('#modal-error-details').text(message || '');
+    displayModal('.modal-content-error');
+}
+
+function displayModal(modalSelector) {
+    var $modal = $('.modal');
+    $modal.children().each(function () {
+        $(this).hide();
+    })
+
+    $(modalSelector).show();
+    $modal.show();
+
+    $(document.body).addClass('fixed');
+}
+
+function hideModal() {
+    $('.modal').hide();
+    $(document.body).removeClass('fixed');
+}
+
+
 $(document).ready(function () {
     $('#event-input-submit').on('click', function (e) {
         e.preventDefault();
@@ -23,7 +48,8 @@ $(document).ready(function () {
             if (response.status == 'inserted') {
                 window.location.href = '/eventDetails?id=' + response.value.id;
             } else {
-                alert("Error. Do something here.");
+                // alert("Error. Do something here.");
+                displayError('Error submitting event', response.error.message || response.error.msg || response.error || 'unknown error' );
             }
         });
     });
@@ -52,7 +78,7 @@ $(document).ready(function () {
             if (response.status == 'updated') {
                 window.location.reload();
             } else {
-                alert("Error. Do something here.");
+                displayError('Error submitting event', response.error.message || response.error.msg || response.error || 'unknown error' );
             }
         });
     });
@@ -78,6 +104,9 @@ $(document).ready(function () {
         $('.event-edit-ok').css({ display: 'none' });
     });
 
+    $('#error-ok').on('click', function () { hideModal(); })
+    $('#message-ok').on('click', function () { hideModal(); })
+    $('.modal').on('click', function () { hideModal(); })
 });
 
 

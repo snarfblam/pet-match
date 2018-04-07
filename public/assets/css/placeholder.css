@@ -1,0 +1,46 @@
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.65);
+    z-index: 100;
+}
+
+.modal-content {
+    display: none;
+    position: relative;
+    width: 800px;
+    max-width: 90%;
+    background: white;
+    height: 400px;
+    max-height: 90%;
+    margin: 3em auto 0 auto;
+
+    overflow-y: auto;
+    border-radius: 3px;
+    border: 2px black solid;
+    padding: 20px;
+
+    outline: gray 1px solid;
+    outline-offset: -4px;
+
+    box-shadow: 0px 0px 30px 20px rgba(0,0,0,0.4);
+    box-shadow: 5px 5px 50px 2px rgba(0,0,0,0.8);
+}
+
+#error-ok, #message-ok {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    border: 2px solid rgb(128, 128, 128);
+    background: lightgray;
+    border-radius: 3px;
+    padding: 5px;
+    box-shadow: 
+        inset -2px -1px 4px 0px rgba(0, 0, 0, 0.35), 
+        inset 0px 1px 5px 0px #ffffff;
+    cursor: pointer;
+}

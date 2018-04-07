@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PetMatch</title>
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/placeholder.css">
     <link rel="stylesheet" href="/assets/css/uikit.min.css">
     <link href="https://fonts.googleapis.com/css?family=Chicle" rel="stylesheet">
 
@@ -26,6 +27,20 @@
         </p>
     </div>
     {{{body}}}
+    
+<div class="modal">
+    <div class="modal-content modal-content-error">
+        <h2 id="modal-error-message">AN ERROR OCCURRED.</h2>
+        <p id="modal-error-details"></p>
+        <button type="submit" class='modal-button' id='error-ok'>OK</button>
+        </form>
+    </div>
+        <div class="modal-content modal-content-message">
+        <p id="modal-error-message">AN ERROR OCCURRED.</p>
+        <button type="submit" class='modal-button' id='message-ok'>OK</button>
+        </form>
+    </div>
+</div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="/assets/js/app.js"></script>

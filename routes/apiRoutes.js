@@ -67,7 +67,7 @@ router.post('/editInfo', (req, res) => {
 // Expects: {date?, address?, city?, state?, zip?, description?, RSVP?}
 // Returns: 
 //  {
-//      status: "error" | "updated",
+//      status: "error" | "updated" | "none",
 //      error?: string,
 //      affectedRows?: number
 //  }
@@ -90,7 +90,7 @@ router.put('/editInfo/:id', (req, res) => {
     }}).then(result => {
         console.log(result);
         res.json({
-            status: 'updated',
+            status: result[0] ? 'updated' : 'none',
             affectedRows: result[0],
         });
     }).catch(e => {
