@@ -31,16 +31,43 @@
     box-shadow: 5px 5px 50px 2px rgba(0,0,0,0.8);
 }
 
-#error-ok, #message-ok {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    border: 2px solid rgb(128, 128, 128);
-    background: lightgray;
-    border-radius: 3px;
-    padding: 5px;
-    box-shadow: 
-        inset -2px -1px 4px 0px rgba(0, 0, 0, 0.35), 
-        inset 0px 1px 5px 0px #ffffff;
+input {
+    border: 1px solid darkgray;
+    border-radius: 2px;
+}
+
+button {
+    border: 1px solid #0000005c;
+    background: white;
+    border-radius: 8px;
+    padding: 5px 1em;
     cursor: pointer;
+    box-shadow: 4px 3px 8px #00000021;
+}
+/* #error-ok, #message-ok { */
+.modal-button {    
+    /* position: absolute; */
+    /* bottom: 20px; */
+    border: 1px solid #0000005c;
+    background: white;
+    border-radius: 8px;
+    padding: 5px 1em;
+    cursor: pointer;
+    font-size: 1.3em;
+    box-shadow: 4px 3px 8px #00000021;
+    margin-right: 15px;
+}
+
+#error-ok {
+
+}
+
+.modal-button-container {
+    position:absolute;
+    bottom: 20px;
+    width: 770px;
+    text-align: right;
+    margin: 0 20px;
+    /* padding: 0 20px; */
+    height: 40px;
 }

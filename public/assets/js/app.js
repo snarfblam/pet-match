@@ -1,8 +1,18 @@
+var msgBoxFunction = null;
+
 
 function displayError(title, message) {
     $('#modal-error-message').text(title);
     $('#modal-error-details').text(message || '');
     displayModal('.modal-content-error');
+}
+
+function displayMsgbox(title, message, showCancelButton) {
+    msgBoxFunction = null;
+    $('#modal-message-message').text(title);
+    $('#modal-message-details').text(message || '');
+    $('#message-cancel').css({ display: showCancelButton ? 'inline-block' : 'none' });
+    displayModal('.modal-content-message');
 }
 
 function displayModal(modalSelector) {
@@ -49,7 +59,7 @@ $(document).ready(function () {
                 window.location.href = '/eventDetails?id=' + response.value.id;
             } else {
                 // alert("Error. Do something here.");
-                displayError('Error submitting event', response.error.message || response.error.msg || response.error || 'unknown error' );
+                displayError('Error submitting event', response.error.message || response.error.msg || response.error || 'unknown error');
             }
         });
     });
@@ -78,7 +88,7 @@ $(document).ready(function () {
             if (response.status == 'updated') {
                 window.location.reload();
             } else {
-                displayError('Error submitting event', response.error.message || response.error.msg || response.error || 'unknown error' );
+                displayError('Error submitting event', response.error.message || response.error.msg || response.error || 'unknown error');
             }
         });
     });
@@ -87,11 +97,17 @@ $(document).ready(function () {
     $('.event-edit-cancel').css({ display: 'none' });
     $('.event-edit-ok').css({ display: 'none' });
 
+    $('.event-edit-delete').on('click', function (e) {
+        displayMsgbox("Deleting Event", "The event listing will be permanently deleted.", true);
+        msgBoxFunction = 'delete';
+    });
+
     $('.event-edit-btn').on('click', function (e) {
         $('.event-input').css({ display: 'initial' });
         $('.event-text').css({ display: 'none' });
 
         $('.event-edit-btn').css({ display: 'none' });
+        $('.event-edit-delete').css({ display: 'none' });
         $('.event-edit-cancel').css({ display: 'initial' });
         $('.event-edit-ok').css({ display: 'initial' });
     });
@@ -100,12 +116,31 @@ $(document).ready(function () {
         $('.event-text').css({ display: 'block' });
 
         $('.event-edit-btn').css({ display: 'initial' });
+        $('.event-edit-delete').css({ display: 'initial' });
         $('.event-edit-cancel').css({ display: 'none' });
         $('.event-edit-ok').css({ display: 'none' });
     });
 
     $('#error-ok').on('click', function () { hideModal(); })
-    $('#message-ok').on('click', function () { hideModal(); })
+    $('#message-cancel').on('click', function () { hideModal(); })
+    $('#message-ok').on('click', function () {
+        hideModal();
+        if (msgBoxFunction == 'delete') {
+            $.ajax({
+                url: "/api/editInfo/" + $('#event-input-id').val(),
+                method: "DELETE",
+            }).then(function (response) {
+                // alert(response.status);
+                if (response.status == 'removed') {
+                    window.location.href = '/events';
+                } else {
+                    var err = response.error || {};
+                    displayError('Error submitting event',
+                        err.message || err.msg || err || 'The listing could not be removed.');
+                }
+            });
+        }
+    })
     $('.modal').on('click', function () { hideModal(); })
 });
 
