@@ -38,11 +38,53 @@ router.get('/rescueDetails', (req, res) => {
     res.render('rescueDetails', res.hbsData);
 });
 router.get('/events', (req, res) => {
-    res.render('events', res.hbsData);
+    models.Event.findAll()
+        .then(results => {
+            res.hbsData.events =
+                results.map(result => getEventHbsData((req.userInfo || {}).id, result));
+            res.render('events', res.hbsData);
+        }).catch(e => {
+        });
 });
-router.get('/eventDetails', (req, res) => {
-    res.render('eventDetails', res.hbsData);
+router.get('/eventDetails', (req, res) => { // ?id=_
+    if (!req.userInfo) {
+        res.render
+    }
+
+
+    var id = req.query.id || 0;
+    models.Event.findOne({ where: { id: id } })
+        .then(result => {
+            var event = result || { description: 'The event was not found.' };
+
+            res.hbsData.event = getEventHbsData((req.userInfo || {}).id, event);
+            res.render('eventDetails', res.hbsData);
+        }).catch(e => {
+
+        });
 });
+function getEventHbsData(viewingUserId, eventModelInst) {
+    return {
+        id: eventModelInst.id,
+        owner: viewingUserId == eventModelInst.UserId,
+        name: eventModelInst.name || '',
+        datestring: getDatetimeInputString(eventModelInst.date),
+        date: getDatetimeInputString(eventModelInst.date),
+        address1: eventModelInst.address1 || '',
+        address2: eventModelInst.address2 || '',
+        city: eventModelInst.city || '',
+        state: eventModelInst.state || '',
+        zip: eventModelInst.zip || '',
+        description: eventModelInst.description || '',
+        descriptionLines: (eventModelInst.description || '').split('\n'),
+        link: eventModelInst.link || '',
+    };
+}
+function getDatetimeInputString(dateObject) {
+    if (dateObject.toJSON) {
+        return dateObject.toJSON().slice(0, 19);
+    } else return '';
+}
 router.get('/addEvent', (req, res) => {
     res.hbsData.now = new Date().toJSON().slice(0, 19);
 

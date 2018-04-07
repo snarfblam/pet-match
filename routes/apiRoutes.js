@@ -8,6 +8,20 @@ var models = require('../models');
 var express = require('express');
 var router = express.Router();
 
+router.use('/*', (req, res, next) => {
+    var id = req.session.userId;
+    if (id) {
+        models.User.findOne(
+            { where: { id: id } }
+        ).then(user => {
+            req.userInfo = user;
+            next();
+        });
+    } else {
+        next();
+    }
+})
+
 router.post('/login', (req, res) => {
     res.status('501').end();
 });
@@ -20,14 +34,12 @@ router.post('/createAccount', (req, res) => {
 //  {
 //      status: "error" | "inserted",
 //      error?: string,
-//      value?: (inserted record)
+//      value?: (inserted record),
 //  }
-// Todo: some kind of user or user token validation
 router.post('/editInfo', (req, res) => {
-    // models.user.create({firstname: "tom",lastname:"my", username: "tommy", about: "sup", email:"a@b.com", password: "dog", last_login:Date(), status: 'active'}).then(r=>console.log(r)).catch(e=>console.log(e))
     models.Event.create({
-        // userId: req.body.userId,
         UserId: req.session.userId,
+        name: req.body.name,
         date: req.body.date,
         address1: req.body.address1,
         address2: req.body.address2,
@@ -37,7 +49,7 @@ router.post('/editInfo', (req, res) => {
         description: req.body.description,
         link: req.body.link,
     }).then(result => {
-        console.log(result);
+         console.log(result);
         res.json({
             status: 'inserted',
             value: result,
@@ -59,21 +71,22 @@ router.post('/editInfo', (req, res) => {
 //      error?: string,
 //      affectedRows?: number
 //  }
-// Todo: some kind of user or user token validation
 router.put('/editInfo/:id', (req, res) => {
     // update event
-    models.events.update({
-        location: req.body.location,
-        description: req.body.description,
-        RSVP: req.body.RSVP,
+    
+    models.Event.update({
         date: req.body.date,
-        address: req.body.address,
+        address1: req.body.address1,
+        address2: req.body.address2,
         city: req.body.city,
         state: req.body.state,
         zip: req.body.zip,
+        description: req.body.description,
+        link: req.body.link,
     }, {
         where: {
-            id: req.params.id,    
+            id: req.params.id, 
+            UserId: req.session.userId,
     }}).then(result => {
         console.log(result);
         res.json({

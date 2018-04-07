@@ -1,7 +1,11 @@
 module.exports = function(sequelize, Sequelize) {
  
     var Event = sequelize.define('Event', {
- 
+        name: {
+            type: Sequelize.STRING,
+            notEmpty: true
+        },
+
         date: {
             type: Sequelize.DATE,
             notEmpty: true
