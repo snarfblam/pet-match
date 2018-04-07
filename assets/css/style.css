@@ -1,13 +1,27 @@
 /* So it's not empty */
 
 body {
-	background-color: #c4e8f8;
+	background-color: #f3f3f3;
 }
 
-h1 {
+.header {
+	background-color: #c4e8f8;
+    border-bottom-color: #f3f3f3;
+    border-bottom-style: solid;
+    border-bottom-width: 30px;
+}
+
+.appName {
+    color: #599f54;
+    font-family: "Chicle", cursive;
+    font-size: 60px;
+    padding: 30px;
+}
+
+/*h1 {
 	color: #599f54;
 	font-family: "Chicle", cursive;
-}
+}*/
 
 button {
 	background-color: #599f54;
