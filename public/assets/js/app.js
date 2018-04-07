@@ -99,6 +99,7 @@ $(document).ready(function () {
                     
                 edit.attr('id', $element.attr('id'));
                 edit.val($element.text());
+                edit.addClass('profile-input');
 
                 $element.replaceWith(edit);
             });
