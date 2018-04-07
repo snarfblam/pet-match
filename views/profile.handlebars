@@ -1,2 +1,26 @@
 <p>A user's profile will go here. He can edit any information that may need to be edited.</p>
 <p>Any event listings he has created will be listed as well.</p>
+
+{{#if user}}
+    <input type='hidden' id='hidden-id' value='{{userId}}'>
+    <p>First Name: <span class='profile-value' id='profile-firstName'>{{user.firstName}}</span></p>
+    <p>Last Name: <span class='profile-value' id='profile-lastName'>{{user.lastName}}</span></p>
+    <p>Display Name: <span class='profile-value' id='profile-displayName'>{{user.displayName}}</span></p>
+    <p>About: <span class='profile-value profile-value-long' id='profile-bio'>{{user.bio}}</span></p>
+    <p>Email: <span class='profile-value' id='profile-email'>{{user.email}}</span></p>
+    <p>Status: <span class='profile-value-noedit' id='profile-status'>{{user.status}}</span></p>
+
+    <button id="profile-edit-button">Edit Profile</button>
+{{else}}
+    <p>Please log in to view/edit your profile.</p>
+{{/if}}
+
+    <p>Your event listings:</p>
+
+    <ul>
+        {{#each events}}
+            <li><a href='/eventDetails?id={{id}}'>{{name}}</a></li>
+        {{else}}
+            <li>You have not created any event listings.</li>
+        {{/each}}
+    </ul>
