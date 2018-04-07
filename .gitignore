@@ -33,3 +33,6 @@ npm-debug.log
 
 # dotenv
 .env
+
+# sessions module
+sessions/
