@@ -108,8 +108,11 @@ router.put('/editInfo/:id', (req, res) => {
 //    }
 // - Todo: some kind of user or user token validation
 router.delete('/editInfo/:id', (req, res) => {
-    models.events.destroy({
-        where: { id: req.params.id }
+    models.Event.destroy({
+        where: {
+            id: req.params.id,
+            UserId: req.session.userId,
+        }
     }).then(result => {
         console.log(result);
         if (result == 0) {
