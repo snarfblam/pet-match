@@ -1,6 +1,8 @@
 .modal {
 .header, .body-content {
     padding-left: 2em;
+    border-style: solid;
+    border-color: #c4e8f8;
 }
 
 .body-content {
@@ -8,14 +10,13 @@
 }
 
 .modal {
->>>>>>> 1e1a9aa46d93746f704c58bfd5a3ed0dc70229c3
     display: none;
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.65);
+    background-color: #c4e8f8;
     z-index: 100;
 }
 
@@ -24,7 +25,7 @@
     position: relative;
     width: 800px;
     max-width: 90%;
-    background: white;
+    background-color: #c4e8f8;
     height: 400px;
     max-height: 90%;
     margin: 3em auto 0 auto;
