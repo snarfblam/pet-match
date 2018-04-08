@@ -1,9 +1,44 @@
-<p>Here we would query our apis and render the page when the API returns. We should consider pageinating the results.</p>
-<ul><li>
+<form class='rescue-search'>
+    <label for='animalTypeInput' class='rescue-label'>
+        <p>Animal Type</p>
+        <select id='animalTypeInput' class='uk-select uk-form-width-medium'>
+            <option>Any</option>
+            <option>Dog</option>
+            <option>Cat</option>
+            <option>Bird</option>
+            <option>Horse</option>
+            <option>Barnyard</option>
+            <option>Reptile</option>
+            <option>Little Guy</option>
+        </select>
+        <input id='animal-type-other'>
+    </label>
+    <label for='animal-size' class='rescue-label'>
+        <p>Animal Size</p>
+        <select id='animal-size' class='uk-select uk-form-width-medium'>
+            <option>Any</option>
+            <option value='S'>Small</option>
+            <option value='M'>Medium</option>
+            <option value='L'>Large</option>
+            <option value='XL'>Huge</option>
+        </select>
+    </label>
+    <label for='animal-sex' class='rescue-label'>
+        <p>Animal Sex</p>
+        <select id='animal-sex' class='uk-select uk-form-width-medium'>
+            <option>Any</option>
+            <option value='M'>Male</option>
+            <option value='F'>Female</option>
+        </select>
+    </label>
+    <label for='animal-location' class='rescue-label'>
+        <p>Zip Code/City, State</p>
+        <input id='zipcodeInput' class='uk-input uk-form-width-medium' type='text'>
+    </label>
+    <p>
+        <button type='submit' id='submit' class='uk-button uk-button-primary'>Search</button>
+    </p>
+</form>
 
-	{{{body}}}
-	
-    Each item links to a <a href="/rescueDetails?rescueId=1234">details</a> page.
-	
-</li></ul>
+<div id="apiView"></div>
 

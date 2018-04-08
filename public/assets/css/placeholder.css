@@ -1,4 +1,14 @@
-/*.modal {
+.modal {
+.header, .body-content {
+    padding-left: 2em;
+}
+
+.body-content {
+    padding-bottom: 2em;
+}
+
+.modal {
+>>>>>>> 1e1a9aa46d93746f704c58bfd5a3ed0dc70229c3
     display: none;
     position: fixed;
     left: 0;
@@ -44,7 +54,7 @@ button {
     cursor: pointer;
     box-shadow: 4px 3px 8px #00000021;
 }
-/* #error-ok, #message-ok { */
+/* #error-ok, #message-ok { 
 .modal-button {    
     /* position: absolute; */
     /* bottom: 20px; */
@@ -70,4 +80,174 @@ button {
     margin: 0 20px;
     /* padding: 0 20px; */
     height: 40px;
+<<<<<<< HEAD
 }*/
+=======
+}
+
+/*/////////////////  forms  //////////////////////////*/
+
+label p {
+    margin: 0.5em 0 0.5em 0;
+}
+
+input, textarea, select {
+    box-sizing: border-box;
+    padding: 4px;
+    border: 1px solid rgb(148, 157, 172);
+    border-radius: 3px;
+}
+
+input, select {
+    width: 180px;
+    margin: auto 10px;
+}
+
+
+textarea {
+    width: 400px;
+    height: 200px;
+    vertical-align: text-top;
+    margin: auto 10px;
+}
+
+/*/////////////////  addEvent.hbs  ///////////////////*/
+
+#event-input-state {
+    width: 4em;
+    margin: auto 0;
+}
+
+#event-input-zip {
+    width: 6em;
+}
+
+/*/////////////////  rescues.hbs  ////////////////////*/
+#animal-type {
+}
+
+#aminal-type-other {
+    width: 200px;
+}
+
+.rescue-label {
+    display: inline-block;
+}
+
+.rescue-search {
+    text-align: center;
+}
+
+.rescue-thumb {
+    height: 150px;
+    width: 150px;
+    object-fit: contain;
+    margin: 0;
+    margin-right: 10px;
+    float: left;
+}
+
+.rescue-image {
+    float: left;
+    margin: 0 1em 1em 0;
+}
+.rescue-item {
+    box-sizing: border-box;
+    height: 250px;
+    overflow: hidden;
+    background: white;
+    margin: 1em 0;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.result-desc {
+    text-overflow: ellipsis;
+    height: 100px;
+    overflow: hidden;
+    white-space: pre-wrap;
+    margin: 0;
+}
+
+.result-desc-long {
+    max-width: 1000px;
+}
+
+.result-desc-container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100px;
+    box-shadow: inset -7px -3px 20px 0px white;
+}
+
+.rescue-desc-shadow {
+    -webkit-box-shadow: inset 0px -15px 10px 0px rgba(255, 255, 255, 1);
+    -moz-box-shadow: inset 0px -15px 10px 0px rgba(255, 255, 255, 1);
+    box-shadow: inset 0px -15px 10px 0px rgba(255, 255, 255, 1);
+    height: 100px;
+    width: 100%;
+    z-index: 100;
+    position:absolute;
+    left: 200px;
+}
+
+#shelter-details {
+    clear: both;
+    /* width: 500px; */
+    /* border: 2px solid cornflowerblue; */
+    /* padding: 0; */
+    max-width: 800px;
+}
+
+#shelter-details h4 {
+    margin: 0.5em;
+}
+
+p.shelter-detail-line {
+    margin-top: .1em;
+    margin-bottom: .1em;
+}
+
+.shelter-section {
+    /* margin-bottom: 1em; */
+    margin: 1em 0.5em;
+    border-left: 2px solid lightblue;
+    padding-left: 4px;
+}
+
+.shelter-header {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 4px;
+    width: 100%;
+    background: lightblue;
+    color: cornflowerblue;
+    margin-bottom: 0.5em;
+}
+
+/*/////////////////  profile.hbs  ////////////////////*/
+
+.profile-item {
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    color: rgb(166, 182, 204);
+    position: relative;
+}
+
+.profile-label {
+    width: 200px;
+    display: inline-block;
+}
+
+.profile-value {
+    color: black;
+}
+
+input.profile-input {
+}
+
+textarea.profile-input {
+    height: 150px;
+}

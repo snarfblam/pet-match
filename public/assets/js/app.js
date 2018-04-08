@@ -92,13 +92,14 @@ $(document).ready(function () {
 
                 var edit;
                 if ($element.hasClass('profile-value-long')) {
-                    edit = $('<textarea>');
+                    edit = $('<textarea>').addClass("uk-input uk-form-width-large");
                 } else {
-                    edit = $('<input>');
+                    edit = $('<input>').addClass("uk-input uk-form-width-medium");
                 }                    
                     
                 edit.attr('id', $element.attr('id'));
                 edit.val($element.text());
+                edit.addClass('profile-input');
 
                 $element.replaceWith(edit);
             });
