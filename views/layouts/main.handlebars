@@ -10,11 +10,15 @@
     <link rel="stylesheet" href="/assets/css/uikit.min.css">
     <link href="https://fonts.googleapis.com/css?family=Chicle" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
 </head>
 
 <body>
     <div class="header">
     <a href="/" class="appNameLink"> <h1>Pet Match</a></h1>
+    <a href="/adoptions" class="navLinks" id="link-one"> <h2>Adoptions</a></h2>
+    <a href="/events" class="navLinks" id="link-two"> <h2>Events</a></h2>
+    <a href="/Profile" class="navLinks" id="link-three"> <h2>Profile</a></h2>
             {{#if logged}}
                 <a href="/profile">{{displayName}}</a> ▪ <a href="/logout">log out</a>
             {{else}}
@@ -28,17 +32,6 @@
     </div>
     {{{body}}}
 
-    <div class="textarea1">
-        {{#each profile}}
-        {{data}}
-        {{/each}}
-    </div>
-
-    <div class="textarea2">
-        {{#each profile}}
-        {{data}}
-        {{/each}}
-    </div>
     
 <div class="modal">
     <div class="modal-content modal-content-error">
@@ -53,8 +46,8 @@
         <h2 id="modal-message-message">Whoops! An error has occured.</h2>
         <p id="modal-message-details"></p>
         <div class="modal-button-container">
-            <button type="submit" class='modal-button' id='message-cancel'>Cancel</button>
-            <button type="submit" class='modal-button' id='message-ok'>OK</button>
+            <button type="submit" class='modal-button' id="message-cancel">Cancel</button>
+            <button type="submit" class="modal-button" id="message-ok">OK</button>
         </div>
         </form>
     </div>

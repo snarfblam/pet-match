@@ -1,3 +1,5 @@
+@import url("reset.css");
+
 body {
 	background-color: #f3f3f3;
 }
@@ -13,30 +15,96 @@ body {
     color: #599f54;
     font-family: "Chicle", cursive;
     font-size: 60px;
-    padding-left: 5px;
+    margin-left: 50px;
+}
+
+.navLinks {
+	float: right;
+	display: inline;
 }
 
 .oauthPath .gLogin {
-	font-family: 'Muli', sans-serif;
+	font-family: 'Boogaloo', cursive;
 	font-weight: bold;
 }
 
+.wrapper {
+	margin-left: 40px;
+}
+
 .textarea1 {
+	width: 40%;
 	background-color: #c4e8f8;
+	font-family: 'Muli', sans-serif;
+	padding: 50px;
+	float: right;
+	position: absolute;
+	margin-left: 400px;
 }
 
 .textarea2 {
 	background-color: #c4e8f8;
+	font-family: 'Muli', sans-serif;
+	padding: 50px;
+	float: left;
+	position: absolute;
+}
+
+#link-one {
+	
+}
+
+#link-two {
+
+}
+
+#link-three {
+
 }
 
 p {
 	font-family: 'Muli', sans-serif;
 }
 
-div {
-	background-color: #c4e8f8;
+.modal-button-container {
+	
 }
 
-button {
+.text-area-center {
+	width: 40%;
+	background-color: #c4e8f8;
+	font-family: 'Muli', sans-serif;
+	padding: 50px;
+	position: absolute;
+    height: 200px;
+    width: 400px;
+    margin: -100px 0 0 -200px;
+    top: 50%;
+    left: 50%;
+}
+
+.text-area-1 {
+
+}
+
+.text-area2 {
+	width: 40%;
+	background-color: #c4e8f8;
+	font-family: 'Muli', sans-serif;
+	padding: 50px;
+}
+
+#message-cancel {
 	background-color: #599f54;
+}
+
+#message-ok {
+	background-color: #599f54;
+}
+
+@media only screen and (max-width:620px) {
+  /* For mobile phones: */
+  .menu, .main, .right {
+    width:100%;
+  }
 }
