@@ -21,8 +21,20 @@ body {
 	font-weight: bold;
 }
 
+.textarea1 {
+	background-color: #c4e8f8;
+}
+
+.textarea2 {
+	background-color: #c4e8f8;
+}
+
 p {
 	font-family: 'Muli', sans-serif;
+}
+
+div {
+	background-color: #c4e8f8;
 }
 
 button {
