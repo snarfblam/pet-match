@@ -3,6 +3,14 @@ App to connect people to pets that need adoption
 
 ## Hello Team
 
+Branches:
+- `master` - Everything ends up here
+- `dev` - My own branch, because I'm special
+- `tests` - Tests currently reside here. The should obviously be merged into master, but I haven't quite gotten there.
+- forks - Everyone else is working on their own fork
+
+## Hello Team
+
 This is our repository. We will fill it with exciting and wonderful things at a feverish pace. Don't forget to `npm install`!
 
 The server runs on port 8080, and there is a .env file that you will need to provide with your local SQL server info/credentials. A schema is included (`/db/schema.sql`) that will create the database for sequelize to use. Sequelize is currently initialized with `{force: true}`. The database will be re-initailized every run so we can freely modify the database structure.
