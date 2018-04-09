@@ -119,7 +119,7 @@ app.use('/api', apiRoutes);
 database.sequelize.sync({ force: false }).then(function () {
     console.log("Database connected.")
     // for testing purposes
-    database.User.create({ firstname: "tom", lastname: "my", username: "tommy", about: "sup", email: "a@b.com", password: "dog", last_login: Date(), status: 'active' }).then(r => console.log(r)).catch(e => console.log(e));
+    // database.User.create({ firstname: "tom", lastname: "my", username: "tommy", about: "sup", email: "a@b.com", password: "dog", last_login: Date(), status: 'active' }).then(r => console.log(r)).catch(e => console.log(e));
 
 }).catch(err => {
     console.log("Failed to connect to database.", err);
