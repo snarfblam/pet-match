@@ -2,7 +2,7 @@
 var express = require('express');
 var fs = require('fs');
 var rimraf = require('rimraf');
-var dotenv = require('dotenv').config();
+if (app.get('env') == 'development'){ require('dotenv').config(); }
 var path = require('path');
 var handlebars = require('express-handlebars');
 var httpRoutes = require('./routes/httpRoutes');
