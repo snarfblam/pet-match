@@ -4,11 +4,17 @@ body {
 	background-color: #f3f3f3;
 }
 
+.body-content {
+	  background-image: url("../images/4_months_old_white_golden_retriever.JPG");
+	  background-repeat: repeat;
+}
+
 .header {
 	background-color: #c4e8f8;
-    border-bottom-color: #f3f3f3;
+	height: 220px;
+    border-bottom-color: #599f54;
     border-bottom-style: solid;
-    border-bottom-width: 30px;
+    border-bottom-width: 5px;
 }
 
 .appNameLink {
@@ -21,11 +27,15 @@ body {
 .navLinks {
 	float: right;
 	display: inline;
+	font-family: 'Boogaloo', cursive;
+	margin: 0px 50px 0px 50px;
 }
 
 .oauthPath .gLogin {
 	font-family: 'Boogaloo', cursive;
 	font-weight: bold;
+	float: right;
+	font-size: 30px;
 }
 
 .wrapper {
@@ -49,6 +59,7 @@ body {
 	float: left;
 	position: absolute;
 }
+
 
 #link-one {
 	
@@ -116,6 +127,16 @@ p {
 
 #message-ok {
 	background-color: #599f54;
+}
+
+#adoption-form {
+	height: 350px;
+	text-align: center;
+}
+
+.form-option {
+	font-family: 'Muli', sans-serif;
+	font-weight: bold;
 }
 
 @media only screen and (max-width:620px) {
