@@ -1,9 +1,12 @@
 <div class="text-area-center container">
 
-<p>Here is where we list our events.</p>
-<p>Logged in users will have the option to create a
-    <a href="/addEvent">new event listing.</a>
-</p>
+{{#if logged}}
+    <a>
+        <a href="/addEvent"><button>Add an Event</button></a>
+    </p>
+{{else}}
+    <p>Log in to add an event listing.</p>
+{{/if}}
 <ul></ul>
 
 {{#each events}}

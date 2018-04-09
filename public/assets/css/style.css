@@ -1,12 +1,33 @@
 @import url("reset.css");
 
+li {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+div.text-area-center.container {
+    height: unset;
+}
 body {
 	background-color: #f3f3f3;
 }
 
+#event-input-submit {
+    margin-top: 1em;
+}
+
+html {
+    background-repeat: repeat;
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/5/59/4_months_old_white_golden_retriever.JPG); 
+    background-attachment: fixed;
+    background-position: 0px 200px;
+
+}
 .body-content {
-	background-image : url("https://d17fnq9dkz9hgj.cloudfront.net/uploads/2017/06/why-are-dogs-scared-of-firework-header.jpg");
-	  background-repeat: repeat;
+	/* background-image : url("https://d17fnq9dkz9hgj.cloudfront.net/uploads/2017/06/why-are-dogs-scared-of-firework-header.jpg"); */
+    /* background-repeat: repeat;
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/5/59/4_months_old_white_golden_retriever.JPG); 
+    background-attachment: fixed; */
 }
 
 .header {
@@ -98,7 +119,7 @@ p {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: #c4e8f8;
+    background-color: #1b2a31ad;
     z-index: 100;
 }
 
@@ -135,7 +156,7 @@ p {
 }
 
 #adoption-form {
-	height: 350px;
+	/* height: 350px; */
 	text-align: center;
 }
 
