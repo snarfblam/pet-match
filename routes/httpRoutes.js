@@ -56,8 +56,9 @@ router.get('/eventDetails', (req, res) => { // ?id=_
     models.Event.findOne({ where: { id: id } })
         .then(result => {
             var event = result || { description: 'The event was not found.' };
-            
-            res.hbsData.event = getEventHbsData((req.userInfo || {}).id, event);
+            if(result){
+                res.hbsData.event = getEventHbsData((req.userInfo || {}).id, event);
+            }    
             res.render('eventDetails', res.hbsData);
         }).catch(e => {
             console.log(e);
