@@ -55,10 +55,12 @@ router.get('/eventDetails', (req, res) => { // ?id=_
     var id = req.query.id || 0;
     models.Event.findOne({ where: { id: id } })
         .then(result => {
-            var event = result || { description: 'The event was not found.' };
-            if(result){
-                res.hbsData.event = getEventHbsData((req.userInfo || {}).id, event);
-            }    
+            // var event = result || { description: 'The event was not found.' };
+            if (result) {
+                res.hbsData.event = getEventHbsData((req.userInfo || {}).id, result);
+            } else {
+                res.hbsData.event = { description: 'The event was not found.' };
+            }
             res.render('eventDetails', res.hbsData);
         }).catch(e => {
             console.log(e);
