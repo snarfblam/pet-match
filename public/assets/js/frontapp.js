@@ -123,6 +123,10 @@ $("#submit").on("click", function () {
     // variables that hold values entered by user. based on what search parameters the user enters
     var zip = $("#zipcodeInput").val().trim().toLowerCase();
     zip = zip.split(',').join('');
+    if (zip.trim().length == 0) {
+        displayError('Location Required', "Please specify a zip code or a city and state.");
+        return;
+    }
     zip = zip ? "&location=" + zip : '';
 
     var animal = $("#animalTypeInput").val().trim().toLowerCase();
