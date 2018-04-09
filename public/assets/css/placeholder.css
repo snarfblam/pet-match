@@ -1,5 +1,8 @@
+.modal {
 .header, .body-content {
     padding-left: 2em;
+    border-style: solid;
+    border-color: #c4e8f8;
 }
 
 .body-content {
@@ -13,7 +16,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.65);
+    background-color: #c4e8f8;
     z-index: 100;
 }
 
@@ -22,7 +25,7 @@
     position: relative;
     width: 800px;
     max-width: 90%;
-    background: white;
+    background-color: #c4e8f8;
     height: 400px;
     max-height: 90%;
     margin: 3em auto 0 auto;
@@ -52,10 +55,10 @@ button {
     cursor: pointer;
     box-shadow: 4px 3px 8px #00000021;
 }
-/* #error-ok, #message-ok { */
+ #error-ok, #message-ok { 
 .modal-button {    
-    /* position: absolute; */
-    /* bottom: 20px; */
+     position: absolute; 
+     bottom: 20px; 
     border: 1px solid #0000005c;
     background: white;
     border-radius: 8px;
@@ -76,8 +79,11 @@ button {
     width: 770px;
     text-align: right;
     margin: 0 20px;
-    /* padding: 0 20px; */
+    /* padding: 0 20px; 
     height: 40px;
+<<<<<<< HEAD
+}*/
+=======
 }
 
 /*/////////////////  forms  //////////////////////////*/
@@ -117,7 +123,7 @@ textarea {
     width: 6em;
 }
 
-/*/////////////////  rescues.hbs  ////////////////////*/
+/////////////////  rescues.hbs  ////////////////////
 #animal-type {
 }
 

@@ -10,11 +10,17 @@
     <link rel="stylesheet" href="/assets/css/uikit.min.css">
     <link href="https://fonts.googleapis.com/css?family=Chicle" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
 </head>
 
 <body>
     <div class="header">
     <a href="/" class="appNameLink"> <h1>Pet Match</a></h1>
+    <a href="/" class="navLinks" id="link-three"> <h2>Profile</a></h2>
+    <a href="/" class="navLinks" id="link-two"> <h2>Events</a></h2>
+    <a href="/" class="navLinks" id="link-one"> <h2>Adoptions</a></h2>
+
+
             {{#if logged}}
                 <a href="/profile">{{displayName}}</a> ▪ <a href="/logout">log out</a>
             {{else}}
@@ -30,6 +36,7 @@
 
     <div class='body-content'>
     {{{body}}}
+
     </div>
     
 <div class="modal">
@@ -44,15 +51,14 @@
         <h2 id="modal-message-message">Whoops! An error has occured.</h2>
         <p id="modal-message-details"></p>
         <div class="modal-button-container">
-            <button type="submit" class='modal-button' id='message-cancel'>Cancel</button>
-            <button type="submit" class='modal-button' id='message-ok'>OK</button>
+            <button type="submit" class='modal-button' id="message-cancel">Cancel</button>
+            <button type="submit" class="modal-button" id="message-ok">OK</button>
         </div>
     </div>
 </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="/assets/js/uikit.min.js"></script>
-    {{!-- <script src="/assets/js/datepicker.min.js"></script> --}}
     <script src="/assets/js/app.js"></script>
     <script src="/assets/js/frontapp.js"></script>
 </body>
