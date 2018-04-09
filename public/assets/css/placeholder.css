@@ -55,10 +55,10 @@ button {
     cursor: pointer;
     box-shadow: 4px 3px 8px #00000021;
 }
-/* #error-ok, #message-ok { 
+ #error-ok, #message-ok { 
 .modal-button {    
-    /* position: absolute; */
-    /* bottom: 20px; */
+     position: absolute; 
+     bottom: 20px; 
     border: 1px solid #0000005c;
     background: white;
     border-radius: 8px;
@@ -79,7 +79,7 @@ button {
     width: 770px;
     text-align: right;
     margin: 0 20px;
-    /* padding: 0 20px; */
+    /* padding: 0 20px; 
     height: 40px;
 <<<<<<< HEAD
 }*/
