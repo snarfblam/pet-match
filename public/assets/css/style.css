@@ -66,6 +66,11 @@ p {
 	font-family: 'Muli', sans-serif;
 }
 
+.headline {
+	font-family: "Chicle", cursive;
+	color: #599f54;
+}
+
 .modal-content .modal-content-error {
 	background-color: aliceblue;
 }
