@@ -16,11 +16,11 @@
 <body>
     <div class="header">
     <a href="/" class="appNameLink"> <h1>Pet Match</a></h1>
-    <a href="/" class="navLinks" id="link-three"> <h2>Profile</a></h2>
-    <a href="/" class="navLinks" id="link-two"> <h2>Events</a></h2>
-    <a href="/" class="navLinks" id="link-one"> <h2>Adoptions</a></h2>
+    <a href="/profile" class="navLinks" id="link-three"> <h2>Profile</a></h2>
+    <a href="/events" class="navLinks" id="link-two"> <h2>Events</a></h2>
+    <a href="/rescues" class="navLinks" id="link-one"> <h2>Adoptions</a></h2>
 
-
+        <div>
             {{#if logged}}
                 <a href="/profile">{{displayName}}</a> ▪ <a href="/logout">log out</a>
             {{else}}
@@ -34,10 +34,11 @@
     </div>
 
 
-    <div class='body-content'>
+    <div class='body-content' style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/5/59/4_months_old_white_golden_retriever.JPG); background-image: repeat; background-attachment: fixed;">
     {{{body}}}
 
     </div>
+
     
 <div class="modal">
     <div class="modal-content modal-content-error">
@@ -56,6 +57,19 @@
         </div>
     </div>
 </div>
+
+<!-- <div>
+    <footer>
+        <h5>Developers:</h5>
+            <ul>
+                <li>Thomas Hudson</li>
+                <li>Rupali Meshram</li>
+                <li>Aaron Bugden</li>
+                <li>Rebecca Brown</li>
+            </ul>
+    </footer>
+</div> -->
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="/assets/js/uikit.min.js"></script>

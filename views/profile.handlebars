@@ -1,6 +1,6 @@
 <div class="text-area-center container">
 
-<h2>{{displayName}}</h2>
+<h2 class="headline-alt">{{displayName}}</h2>
 
 {{#if user}}
     <input type='hidden' id='hidden-id' value='{{userId}}'>
@@ -13,11 +13,11 @@
 
     <button id="profile-edit-button" class="uk-button uk-button-primary">Edit Profile</button>
 {{else}}
-    <p>Please log in to view/edit your profile.</p>
+    <p>Please <span class="login-text"><a href="">log in</a></span> to view/edit your profile.</p>
 {{/if}}
 
 <hr>
-    <h3>Your event listings</h3>
+    <h3 class="headline-alt">Your event listings</h3>
 
     <ul>
         {{#each events}}
