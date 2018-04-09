@@ -1,9 +1,8 @@
 # pet-match
 App to connect people to pets that need adoption
 
-## Hello Team
+## Branches
 
-Branches:
 - `master` - Everything ends up here
 - `dev` - My own branch, because I'm special
 - `tests` - Tests currently reside here. The should obviously be merged into master, but I haven't quite gotten there.
