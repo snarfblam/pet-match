@@ -2,12 +2,40 @@ var chai = require('chai');
 var expect = chai.expect;
 var mocha = require('mocha');
 var cap = require('chai-as-promised');
+
+var formatString = require('./utility/formatString');
+var formatDate = require('./utility/formatDate');
 // var dotenv = require('dotenv').config();
 const Nightmare = require('nightmare')
 const nightmare = Nightmare({ show: true })
 // const models = require('./models');
 // const config = require('./config/config');
 
+describe('formatString', () => {
+    it('should properly insert by index', function (done) {
+        try {
+            expect(formatString('{0} {1} {2}', 'zero', 'one', 'two')).to.equal('zero one two');
+            done();
+        } catch (e) {
+            done(e);
+        }
+    });
+});
+
+describe('formatDate', () => {
+    it('should properly format to M/D/YYYY H:MM AM/PM', function (done) {
+        var d = new Date("Sun Apr 08 2018 23:09:00 GMT-0400 (Eastern Daylight Time)");
+        try {
+            console.log(d.getHours);
+            console.log(formatDate(d));
+            expect(formatDate(d)).to.equal('4/8/2018 11:09 pm');
+            done();
+        } catch (e) {
+            done(e);
+        }
+
+    });
+});
 
 describe('login', () => {
     it('should proceed to google login', function (done) {
