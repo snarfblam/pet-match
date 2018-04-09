@@ -1,6 +1,13 @@
 # pet-match
 App to connect people to pets that need adoption
 
+## Branches
+
+- `master` - Everything ends up here
+- `dev` - My own branch, because I'm special
+- `tests` - Tests currently reside here. The should obviously be merged into master, but I haven't quite gotten there.
+- forks - Everyone else is working on their own fork
+
 ## Hello Team
 
 This is our repository. We will fill it with exciting and wonderful things at a feverish pace. Don't forget to `npm install`!
