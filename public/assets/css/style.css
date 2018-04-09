@@ -5,7 +5,7 @@ body {
 }
 
 .body-content {
-	  background-image: url("../images/4_months_old_white_golden_retriever.JPG");
+	  background-image: url("..assets/images/4_months_old_white_golden_retriever.JPG");
 	  background-repeat: repeat;
 }
 
@@ -144,7 +144,7 @@ p {
 	font-weight: bold;
 }
 
-/*footer {
+footer {
     position: fixed;
     left: 0;
     bottom: 0;
@@ -156,7 +156,7 @@ p {
     border-top: solid;
     border-color: #599f54;
     border-width: 5px;
-}*/
+}
 
 
 @media only screen and (max-width:620px) {
